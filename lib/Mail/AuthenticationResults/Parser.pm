@@ -182,6 +182,9 @@ sub tokenise {
         }
 
         $header = $token->remainder();
+        # Do not retain a copy of the remaining header in every token,
+        # doing so uses memory quadratic in the number of tokens.
+        delete $token->{ 'header' };
         push @tokenised, $token;
     }
 
